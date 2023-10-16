@@ -50,7 +50,6 @@ class Estadia:
 
     def registrar_salida(self):
         precio = Precio.calcular_importe()
-        self.hora_salida = 
 
     
     
