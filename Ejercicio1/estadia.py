@@ -1,14 +1,11 @@
 from datetime import *
 from precio import Precio
 
-
 class Estadia:
-    def __init__(self, nro_patente) -> None:
+    def __init__(self, nro_patente: str, hora_entrada:time=datetime.now().strftime("%H:%M")) -> None:
         self.__fecha = date.today()
         self.__nro_patente = nro_patente
-        # self.__hora_entrada = str(datetime.now().hour) + ":" + str(datetime.now().minute)
-        self.__hora_entrada = None
-        self.__cant_horas = None
+        self.__hora_entrada = hora_entrada
         self.__estado = "Activo"
         self.__pagado = False
         self.__hora_salida = None
@@ -27,7 +24,17 @@ class Estadia:
     
     @property
     def cant_horas(self):
-        return self.__cant_horas
+        formato = "%H:%M"
+    
+        try:
+            hora_entrada = datetime.strptime(self.hora_entrada, formato)
+            hora_salida = datetime.strptime(self.hora_salida, formato)
+        
+            diferencia = hora_salida - hora_entrada
+            horas_totales = diferencia.total_seconds() / 3600  # 3600 segundos en una hora
+            return horas_totales
+        except ValueError:
+            return "Formato de hora incorrecto. Debe ser 'HH:MM'."
     
     @property
     def estado(self):
@@ -44,25 +51,16 @@ class Estadia:
     @hora_salida.setter
     def hora_salida(self, hora):
         self.__hora_salida = hora
+    
+    @estado.setter
+    def estado(self, estado):
+        self.__estado = estado
 
     def __str__(self) -> str:
-        pass
-
-    def registrar_salida(self):
-        precio = Precio.calcular_importe()
-
-    
-    
-    
-    def calcular_horas_estadia(entrada, salida):
-        formato = "%H:%M"
-    
-        try:
-            hora_entrada = datetime.strptime(entrada, formato)
-            hora_salida = datetime.strptime(salida, formato)
+        return self.nro_patente
         
-            diferencia = hora_salida - hora_entrada
-            horas_totales = diferencia.total_seconds() / 3600  # 3600 segundos en una hora
-            return horas_totales
-        except ValueError:
-            return "Formato de hora incorrecto. Debe ser 'HH:MM'."
+    def registrar_salida(self):
+        self.estado = "Pagado"
+        self.hora_salida = datetime.now().strftime("%H:%M")
+        precio = Precio.calcular_importe(self.cant_horas)
+        return precio

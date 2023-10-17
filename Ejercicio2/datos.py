@@ -6,7 +6,7 @@ rosario = Localidad("Rosario", 254, 2000)
 buenos_aires = Localidad("Buenos Aires", 549, 6444)
 cordoba = Localidad("Cordoba", 547, 5477)
 los_angeles = Localidad("Los Angeles", 668, 4222)
-san_diego = Localidad("Sant Diego", 222, 6442)
+san_diego = Localidad("San Diego", 222, 6442)
 
 california = Provincia("California", 5477)
 santa_fe = Provincia("Santa Fe", 5426)
