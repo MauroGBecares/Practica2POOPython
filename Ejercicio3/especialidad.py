@@ -1,5 +1,5 @@
-class Especialidad:
-    def _init_(self, nombre: str, codigo: int) -> None:
+class Especialidad():
+    def __init__(self, nombre: str, codigo: int) -> None:
         self.__nombre = nombre
         self.__codigo = codigo
 
@@ -19,5 +19,5 @@ class Especialidad:
     def codigo(self, nuevo_codigo: int):
         self.__codigo = nuevo_codigo
 
-    def _str_(self) -> str:
-        return self.nombre
+    def __str__(self) -> str:
+        return f"Cod: {self.codigo} - Especialidad: {self.nombre}"

@@ -4,7 +4,7 @@ from medico import *
 
 
 class Turno:
-    def __init__(self, fecha: date, hora: time, paciente: object, medico: object) -> None:
+    def __init__(self, fecha: date, hora: time, paciente: Paciente, medico: Medico) -> None:
         self.__fecha = fecha
         self.__hora = hora
         self.__estado = 'Reservado'
@@ -37,31 +37,32 @@ class Turno:
         self.__estado = estado
 
     @property
-    def paciente(self) -> object:
+    def paciente(self) -> Paciente:
         return self.__paciente
     
     @paciente.setter
-    def paciente(self, paciente: object):
+    def paciente(self, paciente: Paciente):
         self.__paciente = paciente
 
     @property
-    def autoriado(self) -> bool:
+    def autorizado(self) -> bool:
         return self.__autorizado
     
-    @autoriado.setter
+    @autorizado.setter
     def autorizado(self, autorizado: bool):
         self.__autorizado = autorizado
 
     @property
-    def medico(self) -> object:
+    def medico(self) -> Medico:
         return self.__medico
     
     @medico.setter
-    def medico(self, medico: object):
+    def medico(self, medico: Medico):
         self.__medico = medico
 
     def __str__(self) -> str:
-        return self.fecha
+        return f"Turno: Paciente{self.paciente.nombre_apellido} - Médico: {self.medico.nombre_apellido} - Fecha: {self.fecha} - Hora: {self.hora}"
+    
     def ingresar_paciente(self, token: int) -> bool:
         if len(token) == 4: 
             self.estado = 'Ingresado'

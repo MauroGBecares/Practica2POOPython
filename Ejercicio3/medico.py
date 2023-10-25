@@ -1,50 +1,54 @@
 from datetime import date
-from especialidad import *
+from especialidad import Especialidad
 
 class Medico():
-    def _init_(self, nombre_apellido: str, matricula: str, fecha_mat: date) -> None:
+    def __init__(self, nombre_apellido: str, matricula: str, fecha_matricula: date) -> None:
         self.__nombre_apellido = nombre_apellido
         self.__matricula = matricula
-        self.__fecha_mat  = fecha_mat
+        self.__fecha_matricula  = fecha_matricula
         self.__especialidades = []
 
     @property
-    def nombre(self) -> str:
+    def nombre_apellido(self) -> str:
         return self.__nombre_apellido
+    
     @property
-    def mat(self) -> str:
+    def matricula(self) -> str:
         return self.__matricula
+    
     @property
-    def fecha(self) -> str:
-        return self.__fecha_mat
+    def fecha_matricula(self) -> str:
+        return self.__fecha_matricula
     
-    @nombre.setter
-    def nombre(self, nombre):
-        self.__nombre_apellido = nombre
-    
-    @mat.setter
-    def mat(self, mat):
-        self.__matricula = mat
-    
-    @fecha.setter
-    def fecha(self, fecha):
-        self.__fecha_mat = fecha
-
     @property
-    def especialidades(self):
+    def especialidades(self) -> list:
         return self.__especialidades
     
     @especialidades.setter
-    def especialidades(self, especialidad: object):
-        self.__especialidades = especialidad
-
-    def agregar_especialidad(self, nueva_especialidad):
-        self.especialidades.append(nueva_especialidad)
-
-    def eliminar_especialidad(self, especialidad_a_eliminar):
-        for especialidad in self.especialidades: 
-            if especialidad == especialidad_a_eliminar:
-                self.especialidades.pop(especialidad_a_eliminar)
+    def especialidades(self, especialidades: list):
+        self.__especialidades = especialidades
+    
+    @nombre_apellido.setter
+    def nombre(self, nombre):
+        self.__nombre_apellido = nombre
+    
+    @matricula.setter
+    def matricula(self, mat):
+        self.__matricula = mat
+    
+    @fecha_matricula.setter
+    def fecha_matricula(self, fecha):
+        self.__fecha_matricula = fecha
 
     def __str__(self) -> str:
-        return self.nombre_apellido
+        return f"Matricula: {self.matricula} - Nombre y Apellido: {self.nombre_apellido}"
+
+    def agregar_especialidad(self, especidalidad_ingresada: Especialidad):
+        self.especialidades.append(especidalidad_ingresada)
+
+    def eliminar_especialidad(self, especidalidad_ingresada: Especialidad):
+        for especialidad in self.especialidades:
+            if especialidad == especidalidad_ingresada:
+                self.especialidades.pop(especialidad)
+
+medico1 = Medico("Jose Ramirez", "56547", date(2022,6,2))
